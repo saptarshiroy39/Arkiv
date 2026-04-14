@@ -8,7 +8,6 @@ from langchain_community.document_loaders import (
     UnstructuredImageLoader,
     UnstructuredMarkdownLoader,
     UnstructuredPowerPointLoader,
-    WebBaseLoader,
 )
 from langchain_core.documents import Document
 
@@ -81,13 +80,5 @@ def read_pptx(path: str) -> list[Document]:
 # https://python.langchain.com/docs/integrations/document_loaders/image
 def read_img(path: str) -> list[Document]:
     loader = UnstructuredImageLoader(path)
-    docs = loader.load()
-    return docs
-
-
-# URL
-# https://python.langchain.com/docs/integrations/document_loaders/web_base
-def read_url(url: str) -> list[Document]:
-    loader = WebBaseLoader(url)
     docs = loader.load()
     return docs

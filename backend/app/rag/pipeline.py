@@ -1,8 +1,5 @@
-from langchain_core.documents import Document
-
-from app.rag.cleaner import clean_text, process_latex
 from app.rag.chunker import chunk_docs
-from app.rag.vectorstore import add_documents
+from app.rag.cleaner import clean_text, process_latex
 from app.rag.loader import (
     read_csv,
     read_docx,
@@ -12,9 +9,10 @@ from app.rag.loader import (
     read_pdf,
     read_pptx,
     read_txt,
-    read_url,
     read_xlsx,
 )
+from app.rag.vectorstore import add_documents
+from langchain_core.documents import Document
 
 LOADERS = {
     "pdf": read_pdf,
@@ -44,14 +42,6 @@ def process_file(path: str, ext: str) -> int:
     if loader is None:
         raise ValueError(f"Unsupported file type: .{ext}")
     docs = loader(path)
-    docs = _clean_docs(docs)
-    chunks = chunk_docs(docs)
-    add_documents(chunks)
-    return len(chunks)
-
-
-def process_url(url: str) -> int:
-    docs = read_url(url)
     docs = _clean_docs(docs)
     chunks = chunk_docs(docs)
     add_documents(chunks)

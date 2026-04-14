@@ -36,4 +36,4 @@ def process_latex(text: str) -> str:
     return re.sub(r"\${3,}", "$$", text)
 
 
-# Antigravity -> Gemini 3 Pro (High)
+# Antigravity -> Gemini 3.1 Pro (High)
